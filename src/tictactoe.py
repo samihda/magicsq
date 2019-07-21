@@ -19,6 +19,9 @@ def print_board(board):
         else:
             print(cell, end=" ")
 
+        if (i % 3 == 0):
+            print()
+
 def tictactoe():
     print_board(board)
 
