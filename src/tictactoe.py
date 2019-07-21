@@ -31,8 +31,8 @@ def tictactoe():
     while not game_over(board):
         print_board(board)
         pawn = x if x_turn else o
-        move = int(input(pawn + " move to: ")) - 1
-        board[move] = pawn
+        index = int(input(pawn + " move to: ")) - 1
+        board[index] = pawn
         x_turn = not x_turn
 
 if __name__ == '__main__':
