@@ -33,5 +33,8 @@ def tictactoe():
         finished = game_over(board, pawn)
         pawn = o if pawn is x else x
 
+    print_board(board)
+    print(x + " won")
+
 if __name__ == '__main__':
     tictactoe()
