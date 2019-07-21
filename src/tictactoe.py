@@ -8,8 +8,6 @@ empty = ""
 x = "X"
 o = "O"
 
-cells = [empty, x, o]
-
 board = [empty for _ in range(9)]
 
 def game_over(board):
