@@ -28,6 +28,7 @@ def tictactoe():
     while not finished:
         print_board(board)
         index = int(input(pawn + " move to: ")) - 1
+        print()
         board[index] = pawn
         finished = game_over(board, pawn)
         pawn = o if pawn is x else x
