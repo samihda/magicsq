@@ -12,6 +12,9 @@ cells = [empty, x, o]
 
 board = [empty for _ in range(9)]
 
+def game_over(board):
+    return empty not in board
+
 def print_board(board):
     for i, cell in enumerate(board, start=1):
         if (cell is empty):
@@ -23,7 +26,14 @@ def print_board(board):
             print()
 
 def tictactoe():
-    print_board(board)
+    x_turn = True
+
+    while not game_over(board):
+        print_board(board)
+        pawn = x if x_turn else o
+        move = int(input(pawn + " move to: ")) - 1
+        board[move] = pawn
+        x_turn = not x_turn
 
 if __name__ == '__main__':
     tictactoe()
