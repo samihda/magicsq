@@ -1,8 +1,4 @@
-magic_square = [
-    2, 7, 6,
-    9, 5, 1,
-    4, 3, 8,
-]
+from magic import sum_combo
 
 empty = ""
 x = "X"
@@ -10,8 +6,10 @@ o = "O"
 
 board = [empty for _ in range(9)]
 
-def game_over(board):
-    return empty not in board
+def game_over(board, pawn):
+    won = sum_combo([i for i, cell in enumerate(board) if cell is pawn])
+    no_move = empty not in board
+    return no_move or won
 
 def print_board(board):
     for i, cell in enumerate(board, start=1):
@@ -24,14 +22,15 @@ def print_board(board):
             print()
 
 def tictactoe():
-    x_turn = True
+    pawn = x
+    finished = game_over(board, pawn)
 
-    while not game_over(board):
+    while not finished:
         print_board(board)
-        pawn = x if x_turn else o
         index = int(input(pawn + " move to: ")) - 1
         board[index] = pawn
-        x_turn = not x_turn
+        finished = game_over(board, pawn)
+        pawn = o if pawn is x else x
 
 if __name__ == '__main__':
     tictactoe()
