@@ -1,4 +1,4 @@
-from magic import sum_combo
+from magic import win_combo
 
 empty = ""
 x = "X"
@@ -6,10 +6,11 @@ o = "O"
 
 board = [empty for _ in range(9)]
 
-def game_over(board, pawn):
-    won = sum_combo([i for i, cell in enumerate(board) if cell is pawn])
-    no_move = empty not in board
-    return no_move or won
+def move_valid(board, index):
+    if not (0 <= index < len(board)):
+        return False
+
+    return index in [i for i, cell in enumerate(board) if cell is empty]
 
 def print_board(board):
     for i, cell in enumerate(board, start=1):
@@ -23,18 +24,38 @@ def print_board(board):
 
 def tictactoe():
     pawn = x
-    finished = game_over(board, pawn)
 
-    while not finished:
+    while empty in board:
         print_board(board)
-        index = int(input(pawn + " move to: ")) - 1
-        print()
-        board[index] = pawn
-        finished = game_over(board, pawn)
-        pawn = o if pawn is x else x
 
-    print_board(board)
-    print(x + " won")
+        input_string = ""
+        try:
+            input_string = input(pawn + " move to: ")
+        except (KeyboardInterrupt, EOFError):
+            print()
+            exit(0)
+
+        index = -1
+        try:
+            index = int(input_string) - 1
+        except ValueError:
+            print("Please enter a number\n")
+            continue
+
+        if (move_valid(board, index)):
+            board[index] = pawn
+        else:
+            print("Invalid move\n")
+            continue
+
+        if (win_combo([i for i, cell in enumerate(board) if cell is pawn])):
+            print()
+            print_board(board)
+            print(x + " won")
+            break
+
+        pawn = o if pawn is x else x
+        print()
 
 if __name__ == '__main__':
     tictactoe()

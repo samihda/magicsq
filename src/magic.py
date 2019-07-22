@@ -6,7 +6,7 @@ square = [
 
 constant = 15
 
-def sum_combo(indexes):
+def win_combo(indexes):
     total = 0
     for n in [square[i] for i in indexes]:
         total += n
