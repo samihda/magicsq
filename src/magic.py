@@ -8,9 +8,20 @@ square = [
 
 constant = 15
 
-def win_combo(js):
-    total = 0
-    for n in [square[j] for j in js]:
-        total += n
+indexes = range(size * size)
 
-    return total == constant
+rows = [list(indexes[i:i + size]) for i in range(0, len(indexes), size)]
+cols = [list(range(i, size * size, size)) for i in range(size)]
+diag_1 = [i + offset for i, offset in zip(range(0, size * size, size), range(size))]
+diag_2 = [i + offset for i, offset in zip(range(0, size * size, size), reversed(range(size)))]
+combos = [*rows, *cols, diag_1, diag_2]
+
+for combo in combos:
+    assert(sum([square[i] for i in combo]) == constant)
+
+def win_combo(idxs):
+    for combo in combos:
+        if set(combo).issubset(idxs):
+            return True
+
+    return False
