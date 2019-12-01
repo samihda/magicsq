@@ -6,6 +6,9 @@ o = "O"
 
 board = [empty for _ in range(size * size)]
 
+def board_full():
+    return empty not in board
+
 def move_valid(board, index):
     if not (0 <= index < len(board)):
         return False
@@ -52,6 +55,11 @@ def tictactoe():
             print()
             print_board(board)
             print(x + " won")
+            break
+        elif (board_full()):
+            print()
+            print_board(board)
+            print("drew")
             break
 
         pawn = o if pawn is x else x
