@@ -8,9 +8,9 @@ square = [
 
 constant = 15
 
-def win_combo(indexes):
+def win_combo(js):
     total = 0
-    for n in [square[i] for i in indexes]:
+    for n in [square[j] for j in js]:
         total += n
 
     return total == constant
