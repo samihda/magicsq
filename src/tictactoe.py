@@ -1,10 +1,10 @@
-from magic import win_combo
+from magic import size, win_combo
 
 empty = ""
 x = "X"
 o = "O"
 
-board = [empty for _ in range(9)]
+board = [empty for _ in range(size * size)]
 
 def move_valid(board, index):
     if not (0 <= index < len(board)):
@@ -19,7 +19,7 @@ def print_board(board):
         else:
             print(cell, end=" ")
 
-        if (i % 3 == 0):
+        if (i % size == 0):
             print()
 
 def tictactoe():
